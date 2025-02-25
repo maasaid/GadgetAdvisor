@@ -5,7 +5,10 @@ import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
+import org.springframework.data.annotation.CreatedDate;
+import org.springframework.data.annotation.LastModifiedDate;
 
+import java.time.Instant;
 import java.time.LocalDate;
 
 
@@ -16,12 +19,11 @@ import java.time.LocalDate;
 @Setter
 @Table(name = "users")
 public class UserModel {
-
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @Column(nullable = false)
+    @Column(nullable = false, unique = true)
     private String username;
 
     @Column(nullable = false)
@@ -30,14 +32,18 @@ public class UserModel {
     @Column(nullable = false, unique = true)
     private String email;
 
-    @Getter
-    @Column(name = "phone_number", nullable = false, unique = true) // for keeping the name as it is in the db even if i change it here the name in tne db will still phone_number.
-    private String phoneNumber;
-
     @Column(nullable = false)
     private String country;
 
     @Column(nullable = false)
     private LocalDate birthday;
+
+    @Column(name = "created_at", nullable = false, updatable = false)
+    @CreatedDate
+    private Instant createdAt;
+
+    @Column(name = "updated_at")
+    @LastModifiedDate
+    private Instant updatedAt;
 
 }
