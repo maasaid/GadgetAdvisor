@@ -1,7 +1,10 @@
-/tech/tech/src/main/resources
+/target/
 /.idea
+*.iml
 
-
-
-
-
+/src/main/resources
+# === Logs / Temp Files ===
+*.log
+logs/
+*.tmp
+*.bak
